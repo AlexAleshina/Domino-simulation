@@ -23,7 +23,7 @@ function pickRandomTile(stock) {
 
 function prepareForGame(stock, board, player1, player2) {
     board.push(pickRandomTile(stock));
-    console.log(`Game started with the first tile <${board}>`);
+    console.log(`Game started with the first tile: <${board}>`);
     for (let i = 0; i < 7; i++) {
         player1.push(pickRandomTile(stock));
         player2.push(pickRandomTile(stock));
@@ -31,13 +31,6 @@ function prepareForGame(stock, board, player1, player2) {
 }
 
 function makeTurn(player, stock, board, name) {
-    //check for matches tiles of player with board
-    //if no tiles in hand, this player is winner, the end
-    //condition pick the largest tile and push to the board where the match is
-    //if no matches pick from stock random one and check for match; if the tile is a match, push to the board, if no, pick again.
-    //if null in stock the End
-    //
-    //
     function putTileIfMatch(tile) {
         if (tile[0] == board[board.length - 1][1]) {
             console.log(`${name} put new tile: <${tile}> to ${board[board.length - 1]}`);
@@ -101,16 +94,16 @@ function playGame() {
     //players make turns alternatively while they have cards and matches
     while (true) {
 
-        let player1MadeTurn = makeTurn(player1, stock, board, 'Alex');
+        let player1MadeTurn = makeTurn(player1, stock, board, 'Player1');
 
         if (player1.length == 0) {
-            console.log("player 1 won");
+            console.log("Player 1 won");
             break;
         }
 
-        let player2MadeTurn = makeTurn(player2, stock, board, 'Eugene');
+        let player2MadeTurn = makeTurn(player2, stock, board, 'Player2');
         if (player2.length == 0) {
-            console.log("player 2 won");
+            console.log("Player 2 won");
             break;
         }
 
@@ -118,22 +111,13 @@ function playGame() {
 
             let sumPlayer1 = player1.reduce((sum, tile) => sum + tile[0] + tile[1], 0);
             let sumPlayer2 = player2.reduce((sum, tile) => sum + tile[0] + tile[1], 0);
-            // let sumPlayer1;
-            // for (let i = 0; i < player1.length; i++) {
-            //     sumPlayer1 += player1[i][0] + player1[i][1];
-            // }
-
-            // let sumPlayer2;
-            // for (let i = 0; i < player2.length; i++) {
-            //     sumPlayer2 += player2[i][0] + player2[i][1];
-            // }
 
             if (sumPlayer1 < sumPlayer2) {
-                console.log(`player 1 won with score: ${sumPlayer1} vs ${sumPlayer2}`);
+                console.log(`Player 1 won with score: ${sumPlayer1} vs ${sumPlayer2}`);
             } else if (sumPlayer1 > sumPlayer2) {
-                console.log(`player 2 won with score: ${sumPlayer2} vs ${sumPlayer1}`);
+                console.log(`Player 2 won with score: ${sumPlayer2} vs ${sumPlayer1}`);
             } else {
-                console.log(`draw with score ${sumPlayer1}`);
+                console.log(`Draw with score ${sumPlayer1}`);
             }
             break;
         }
